@@ -7,6 +7,7 @@ public class BallSpawnHandler : MonoBehaviour
     [SerializeField] GameObject BallsGrap; // Drag your object prefab here in the Unity Inspector
     [SerializeField] private Transform LaunchPoint;   // The point from which the object will be launched
     [SerializeField] float LaunchForce = 10f; // The force at which the object will be launched
+    [SerializeField] int BallAvailable = 3;
 
     private GameObject SpawnedObject;
     private bool HoldingObject = false;
@@ -24,9 +25,10 @@ public class BallSpawnHandler : MonoBehaviour
             {
                 LaunchObject();
             }
-            else
+            else if (!HoldingObject & BallAvailable != 0)
             {
                 SpawnObject();
+                BallAvailable --;
             }
         }
     }

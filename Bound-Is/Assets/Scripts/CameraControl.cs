@@ -8,7 +8,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
-    [SerializeField] Camera Camera;
+    //[SerializeField] Camera Camera;
     [SerializeField] Transform CameraFollowPoint;
 
     [SerializeField] private float HorizontalSpeed = 100f;
@@ -26,9 +26,12 @@ public class CameraController : MonoBehaviour
     private float CurtHoriAngel = 0f;
     private float CurtVertiAngel = 0f;
 
+    public float _CurtHoriAngel => CurtHoriAngel;
+
     [SerializeField] private bool InvertY = true;
 
     private RaycastHit HitObstacle;
+
 
     void Start()
     {
