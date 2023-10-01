@@ -23,7 +23,7 @@ public class BatSwing : MonoBehaviour
     private void Update()
     {
         // Check for input to start swinging
-        if (Input.GetMouseButtonDown(1) && !isSwinging && !isReturning)
+        if (Input.GetMouseButtonDown(0) && !isSwinging && !isReturning)
         {
             StartSwing();
         }
