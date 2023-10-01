@@ -3,18 +3,41 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody))]
 public class BounceController : MonoBehaviour
 {
-    public float bounceForce = 10.0f; // Adjust this value to control the bounce force
+    Rigidbody BallRigid;
+    public float bounceForce = 10.0f;
+
+    Vector3 BallSpeed;
+
+    private void Awake()
+    {
+        BallRigid = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        BallSpeed = BallRigid.velocity;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if the object collided with something
         if (collision.gameObject.CompareTag("BounceSurface") || collision.gameObject.CompareTag("Ball") || collision.gameObject.CompareTag("Player") ) // BounceSurface
         {
+
+            // Calculate the angle between the ball's direction and the wall's normal in radians
+            float angle = Mathf.Atan2(Vector3.Dot(BallSpeed, Vector3.Cross(Vector3.up, collision.contacts[0].normal)), Vector3.Dot(BallSpeed, collision.contacts[0].normal));
+
+            // Convert the angle from radians to degrees
+            float angleInDegrees = angle * Mathf.Rad2Deg;
+
+            // Log the angle in degrees to the console
+            Debug.Log("Angle with Wall: " + angleInDegrees);
+
+            var Speed = BallSpeed.magnitude;
             // Calculate the bounce direction based on the collision normal
-            Vector3 bounceDirection = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
+            Vector3 BounceDirection = Vector3.Reflect(BallSpeed.normalized, collision.contacts[0].normal);
 
             // Apply the bounce force with the calculated direction
-            GetComponent<Rigidbody>().AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(BounceDirection * bounceForce, ForceMode.Impulse);
         }
     }
 }

@@ -7,7 +7,7 @@ public class HPManager : MonoBehaviour
     [SerializeField] GameObject ObjectWithHP;//
     [SerializeField] private int MaxHP = 3;
     [SerializeField] private int HP;
-    [SerializeField] private float InvincibleDuration = 2f; // Duration of invincibility frames in seconds
+    [SerializeField] private float InvincibleDuration = 4f; //Invincibility Duration in seconds
     private bool IsInvincible = false;
 
     private void Start()
