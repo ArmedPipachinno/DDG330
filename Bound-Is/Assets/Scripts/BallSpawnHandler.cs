@@ -6,8 +6,8 @@ public class BallSpawnHandler : MonoBehaviour
 {
     [SerializeField] GameObject BallsGrap; //Object to spawn/launch
     [SerializeField] private Transform LaunchPoint;
-    [SerializeField] float LaunchForce = 25f;
-    [SerializeField] int BallAvailable = 3;
+    [SerializeField] private float LaunchForce = 25f;
+    [SerializeField] private int BallAvailable = 3;
 
     private GameObject SpawnedObject;
     private bool HoldingObject = false;

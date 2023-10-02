@@ -1,16 +1,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class MovementBod : MonoBehaviour
+public class Movement : MonoBehaviour
 {
-    [SerializeField] Camera Cam_Val;
+    //[SerializeField] Camera CamVal;
     [SerializeField] Rigidbody RigidPlay;
-    [SerializeField] private float _WalkSpeed = 1.0f;
-    [SerializeField] private float _RunSpeed = 2.0f;
+    [SerializeField] private float WalkSpeed = 1.0f;
+    [SerializeField] private float RunSpeed = 2.0f;
     //private float _Accel = .75f;
-    [SerializeField] private float RotationSpeed = 15.0f;
+    //[SerializeField] private float RotationSpeed = 15.0f;
 
-    private Vector3 mouseRotation;
+    //private Vector3 mouseRotation;
 
     private void Awake()
     {
@@ -19,22 +19,22 @@ public class MovementBod : MonoBehaviour
 
     void Update()
     {
-        bool Run = Input.GetKey(KeyCode.LeftShift);
-        float HorizontalInput = Input.GetAxis("Horizontal");
-        float VerticalInput = Input.GetAxis("Vertical");
-        float TargetSpeed = Run ? _RunSpeed : _WalkSpeed;
+        bool run = Input.GetKey(KeyCode.LeftShift);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        float targetSpeed = run ? RunSpeed : WalkSpeed;
 
-        Vector3 moveDirection = new Vector3(HorizontalInput, 0f, VerticalInput).normalized;
+        Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Run = true;
+            run = true;
         }
 
-        Vector3 velocity = moveDirection * TargetSpeed;
+        Vector3 velocity = moveDirection * targetSpeed;
 
         Vector3 newPosition = RigidPlay.transform.position + velocity * Time.deltaTime;
-        RigidPlay.MovePosition(newPosition);
+        RigidPlay.velocity = newPosition;
     }
 
     //float cameraHorizontalAngle = _CurtHoriAngle;
